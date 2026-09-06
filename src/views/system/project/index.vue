@@ -166,7 +166,7 @@
 </template>
 
 <script setup name="Project">
-import sceneConfig from '@/scene/config'
+import sceneConfig from '@/scene/zhaoshang'
 import { listProject, statisticsProject, getProject, addProject, updateProject, changeProjectStatus, delProject } from '@/api/system/project'
 
 const { proxy } = getCurrentInstance()
@@ -178,7 +178,8 @@ const dictMap = {
 }
 
 function dictOptions(dictType) {
-  return dictMap[dictType] || []
+  const dict = dictMap[dictType]
+  return dict ? dict.value : []
 }
 
 const projectList = ref([])
