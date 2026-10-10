@@ -1,4 +1,4 @@
-// RuoYi-Vue3 前端 CI：拉代码 → 安装依赖 → 构建 → 归档 dist
+// RuoYi-Vue3 前端 CI/CD：拉代码 → 安装依赖 → 构建 → 归档 dist → 部署（原子切换 + nginx 重载）
 // 触发：Jenkins 任务侧 SCMTrigger 轮询（H/5 * * * *）
 pipeline {
     agent any
@@ -22,6 +22,11 @@ pipeline {
         stage('归档制品') {
             steps {
                 archiveArtifacts artifacts: 'dist/**', fingerprint: true
+            }
+        }
+        stage('部署') {
+            steps {
+                bat 'powershell -NoProfile -ExecutionPolicy Bypass -File deploy\\deploy-frontend.ps1 -SourceDist dist'
             }
         }
     }
