@@ -28,6 +28,13 @@ const chains = [
   }
 ]
 
+// 测试数据辅助：返回 N 个月前的日期（保证融资新鲜度档位稳定）
+function monthsAgoDate(months) {
+  const d = new Date()
+  d.setMonth(d.getMonth() - months)
+  return d.toISOString().slice(0, 10)
+}
+
 const rawCompanies = [
   {
     companyId: 1, companyName: '青藤动力能源科技', creditCode: '91320000DEMO000001',
@@ -119,6 +126,13 @@ const rawCompanies = [
     mainProduct: '精密金属结构件', businessKeywords: '钣金,冲压,五金结构件',
     metric: { dataDate: '2026-06-30', revenueYoy: 20, profitYoy: 12, patentCount: 30, rdRatio: 5.0, highTechFlag: '0', lastFinanceRound: 'series_a', lastFinanceAmount: 4000, lastFinanceDate: '2025-09-20', riskLevel: '0', lawsuitCount: 0, abnormalCount: 0, riskNote: '' },
     link: null
+  },
+  {
+    companyId: 14, companyName: '星驰新能源科技（99分测试）', creditCode: '91320000DEMO000014',
+    region: '市高新区', industry: 'new_energy', companyScale: '1', estDate: '2014-06-18', regCapital: 60000,
+    mainProduct: '动力电池系统', businessKeywords: '动力电池,电芯,电池包',
+    metric: { dataDate: '2026-06-30', revenueYoy: 60, profitYoy: 50, patentCount: 150, rdRatio: 12.5, highTechFlag: '1', lastFinanceRound: 'series_d', lastFinanceAmount: 120000, lastFinanceDate: monthsAgoDate(8), riskLevel: '0', lawsuitCount: 0, abnormalCount: 0, riskNote: '' },
+    link: { chainId: 1, nodeId: 2, linkType: '1', linkRole: '1', evidence: '99分测试数据：动力电池缺链关键环节，人工挂接' }
   }
 ]
 
